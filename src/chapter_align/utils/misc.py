@@ -1,3 +1,4 @@
+from pathlib import Path
 import logging
 
 
@@ -26,3 +27,15 @@ def setup_logger(
     module_console_handler.setFormatter(formatter)
 
     logroot.addHandler(module_console_handler)
+
+
+def get_package_root_folder() -> Path:
+    r"""Gets the root folder of the project"""
+    # logg = logging.getLogger(f"c.{__name__}.get_package_root_folder")
+    # logg.setLevel("INFO")
+    # logg.debug("Start get_package_root_folder")
+
+    this_file_folder = Path(__file__).absolute().parent
+    # logg.debug(f"{this_file_folder=}")
+    package_root_folder = this_file_folder.parent.parent.parent
+    return package_root_folder

@@ -3,6 +3,7 @@ import logging
 import click
 
 from . import __version__
+from .utils.misc import get_package_root_folder  # type: ignore
 from .utils.misc import setup_logger
 
 
@@ -27,10 +28,13 @@ from .utils.misc import setup_logger
 )
 @click.version_option(version=__version__)
 def main(log_level_debug: str, log_level_type: str) -> None:
-    r"""MAKEDOC: What is main doing?"""
+    r"""The main CLI entry point to the aligner"""
     setup_logger(log_level_debug, log_level_type)
     logg = logging.getLogger(f"c.{__name__}.main")
     logg.debug("Starting main")
+
+    package_root_folder = get_package_root_folder()
+    logg.debug(f"{package_root_folder=}")
 
 
 if __name__ == "__main__":  # pragma: no cover
