@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "chapter-align"
+version = "0.1.0"
+description = "A simple tool to align chapters"
+authors = ["Pitrified <pitrified.git@gmail.com>"]
+license = "MIT"
+readme = "README.rst"
+homepage = "https://github.com/Pitrifier/chapter-align"
+repository = "https://github.com/Pitrifier/chapter-align"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+click = "^7.1.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.2"
+flake8 = "^3.8.4"
+mypy = "^0.812"
+
+[tool.poetry.scripts]
+chapter-align = "chapter_align.__main__:main"
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.coverage.run]
+branch = true
+source = ["chapter_align"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 100
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
