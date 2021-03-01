@@ -12,7 +12,7 @@ class Sentence:
         Mostly a thin wrapper around a BeautifulSoup Tag
         """
         logg = logging.getLogger(f"c.{__name__}.__init__")
-        logg.setLevel("DEBUG")
+        # logg.setLevel("DEBUG")
         # logg.debug("Start __init__")
 
         self.orig_tag = orig_tag
@@ -27,23 +27,26 @@ class Sentence:
             logg.debug(f"self.norm_tra: {self.norm_tra}")
 
         # normalize further by removing \n
-        self.norm_tra = self.norm_tra.replace("\n", "")
+        self.norm_tra = self.norm_tra.replace("\n", " ")
 
         self.len_norm_tra = len(self.norm_tra)
 
+        if self.len_norm_tra < 5:
+            logg.warning(f"Very short sentence found:\n{self!r}")
+
     def __str__(self) -> str:
         r"""Return the readable string for the sentence"""
-        logg = logging.getLogger(f"c.{__name__}.__str__")
+        # logg = logging.getLogger(f"c.{__name__}.__str__")
         # logg.setLevel("DEBUG")
-        logg.debug("Start __str__")
+        # logg.debug("Start __str__")
 
         return self.norm_tra
 
     def __repr__(self) -> str:
         r"""Return more informations on the sentence"""
-        logg = logging.getLogger(f"c.{__name__}.__repr__")
+        # logg = logging.getLogger(f"c.{__name__}.__repr__")
         # logg.setLevel("DEBUG")
-        logg.debug("Start __repr__")
+        # logg.debug("Start __repr__")
 
         repr_str = ""
         repr_str += f"OT: {self.orig_tag}"

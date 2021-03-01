@@ -12,7 +12,7 @@ def load_chapter(
 ) -> ty.List[Sentence]:
     r"""Load a chapter and split it in Sentences"""
     logg = logging.getLogger(f"c.{__name__}.load_chapter")
-    logg.setLevel("DEBUG")
+    # logg.setLevel("DEBUG")
     logg.debug("Start load_chapter")
 
     chapter_path = lang_folder / chapter_template.format(chapter_index)
@@ -30,7 +30,7 @@ def load_chapter(
     sentences: ty.List[Sentence] = []
 
     for i, par in enumerate(parsed_body.find_all("p")):
-        # logg.debug(f"\n>>>>>> par {i}\n{par}")
+        logg.debug(f"\n>>>>>> par {i}\n{par}")
         # logg.debug(f"{type(par)=}")
         # logg.debug(f"{par.contents=}")
         # logg.debug(f"str(par): >{str(par)}<")

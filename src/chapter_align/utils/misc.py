@@ -13,7 +13,7 @@ def setup_logger(
     module_console_handler = logging.StreamHandler()
 
     if msg_type == "anlm":
-        log_format_module = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        log_format_module = "%(asctime)s - %(name)s - %(levelname)s: %(message)s"
     elif msg_type == "nlm":
         log_format_module = "%(name)s - %(levelname)s: %(message)s"
     elif msg_type == "lm":
