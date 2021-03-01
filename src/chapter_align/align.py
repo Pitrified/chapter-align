@@ -45,7 +45,7 @@ def align_book(
     chapter_index = 1
     # TODO, the starting index sould be different for the two books
 
-    skip_interval = 5
+    # skip_interval = 5
 
     lang_folder0 = book_folder / languages[0]
     sent0 = load_chapter(lang_folder0, chapter_templates[0], chapter_index)
