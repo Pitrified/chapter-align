@@ -52,6 +52,7 @@ def mypy(session: Session) -> None:
 def tests(session: Session) -> None:
     """Run the test suite."""
     args = session.posargs or ["--cov"]
+    session.run("poetry", "install", external=True)
     install_with_constraints(
         session,
         "coverage[toml]",

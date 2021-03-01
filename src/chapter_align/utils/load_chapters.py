@@ -24,13 +24,14 @@ def load_chapter(lang_folder: Path, chapter_template: str, chapter_index: int) -
     if parsed_body is None:
         raise RuntimeError("Body not found in the chapter text")
 
-    for par in parsed_body.find_all("p"):
-        logg.debug(f"\n{par=}")
-        logg.debug(f"{type(par)=}")
-        logg.debug(f"{par.contents=}")
-        logg.debug(f"str(par): >{str(par)}<")
-        logg.debug(f">{par.string=}<")
-        logg.debug(f"par.string: >{par.string}<")
+    for i, par in enumerate(parsed_body.find_all("p")):
+        # logg.debug(f"\n>>>>>> par {i}\n{par}")
+        # logg.debug(f"{type(par)=}")
+        # logg.debug(f"{par.contents=}")
+        # logg.debug(f"str(par): >{str(par)}<")
+        # logg.debug(f"par.string: >{par.string}<")
+        # logg.debug(f"par.strings: >{list(par.strings)}<")
         sentence = Sentence(par)
-        logg.debug(f"sentence: {sentence}")
-        break
+        # logg.debug(f"\n>>>>> sentence {i}:\n{sentence}")
+        logg.debug(f"\n>>>>> sentence {i}:\n{sentence!r}")
+        # break
