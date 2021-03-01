@@ -49,24 +49,35 @@ def align_book(
 
     lang_folder0 = book_folder / languages[0]
     sent0 = load_chapter(lang_folder0, chapter_templates[0], chapter_index)
-    logg.debug(f"len(sent0): {len(sent0)}")
+    recap = f"len(sent0): {len(sent0)}"
+    recap += f" sent0.tot_chars: {sent0.tot_chars}"
+    logg.debug(recap)
 
     lang_folder1 = book_folder / languages[1]
     sent1 = load_chapter(lang_folder1, chapter_templates[1], chapter_index)
-    logg.debug(f"len(sent1): {len(sent1)}")
+    recap = f"len(sent1): {len(sent1)}"
+    recap += f" sent1.tot_chars: {sent1.tot_chars}"
+    logg.debug(recap)
 
-    tot_len0 = 0
-    tot_len1 = 0
+    tot_len0: int = 0
+    tot_len1: int = 0
+    tot_scaled_len1: float = 0
+    scaling_factor = sent0.tot_chars / sent1.tot_chars
+    logg.debug(f"scaling_factor: {scaling_factor}")
 
-    for i in range(min(len(sent0), len(sent1))):
+    for i in range(max(len(sent0), len(sent1))):
         len0 = sent0[i].len_norm_tra
-        len1 = sent1[i].len_norm_tra
         tot_len0 += len0
+
+        len1 = sent1[i].len_norm_tra
         tot_len1 += len1
+
+        scaled_len1 = len1 * scaling_factor
+        tot_scaled_len1 += scaled_len1
 
         recap = f"\n>>>>>> {i}"
         recap += f"\n0 ({len0}): >{sent0[i]}<"
         recap += f"\n1 ({len1}): >{sent1[i]}<"
-        recap += f"\nlen0 {len0: 6d} len1 {len1: 6d}"
-        recap += f"\ntot0 {tot_len0: 6d} tot1 {tot_len1: 6d}"
+        recap += f"\nlen0 {len0: 6d} len1 {len1: 6d} sc_len1 {scaled_len1: 8.2f}"
+        recap += f"\ntot0 {tot_len0: 6d} tot1 {tot_len1: 6d} t_sc_1 {tot_scaled_len1: 8.2f}"
         logg.debug(recap)

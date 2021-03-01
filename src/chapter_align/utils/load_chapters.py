@@ -1,15 +1,16 @@
 from pathlib import Path
 import logging
-import typing as ty
+# import typing as ty
 
 from bs4 import BeautifulSoup  # type: ignore
 
 from .Sentence import Sentence
+from .SentenceList import SentenceList
 
 
 def load_chapter(
     lang_folder: Path, chapter_template: str, chapter_index: int
-) -> ty.List[Sentence]:
+) -> SentenceList:
     r"""Load a chapter and split it in Sentences"""
     logg = logging.getLogger(f"c.{__name__}.load_chapter")
     # logg.setLevel("DEBUG")
@@ -27,7 +28,7 @@ def load_chapter(
     if parsed_body is None:
         raise RuntimeError("Body not found in the chapter text")
 
-    sentences: ty.List[Sentence] = []
+    sentences = SentenceList()
 
     for i, par in enumerate(parsed_body.find_all("p")):
         logg.debug(f"\n>>>>>> par {i}\n{par}")

@@ -32,7 +32,7 @@ class Sentence:
         self.len_norm_tra = len(self.norm_tra)
 
         if self.len_norm_tra < 5:
-            logg.warning(f"Very short sentence found:\n{self!r}")
+            logg.debug(f"Very short sentence found:\n{self!r}")
 
     def __str__(self) -> str:
         r"""Return the readable string for the sentence"""
