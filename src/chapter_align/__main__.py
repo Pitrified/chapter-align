@@ -5,6 +5,7 @@ import click
 from . import __version__
 from .utils.misc import get_package_root_folder  # type: ignore
 from .utils.misc import setup_logger
+from .align import align_book
 
 
 @click.command()
@@ -35,6 +36,18 @@ def main(log_level_debug: str, log_level_type: str) -> None:
 
     package_root_folder = get_package_root_folder()
     logg.debug(f"{package_root_folder=}")
+    data_folder = package_root_folder / "data"
+
+    author_name = "leroux"
+    book_name = "yellow_room"
+    language1 = "english"
+    language2 = "french"
+
+    book_folder = data_folder / author_name / book_name
+
+    chapter_template = "ch_{:04d}"
+
+    align_book(book_folder, language1, language2, chapter_template)
 
 
 if __name__ == "__main__":  # pragma: no cover

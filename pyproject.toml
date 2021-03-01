@@ -16,6 +16,8 @@ click = "^7.1.2"
 pytest = "^6.2.2"
 flake8 = "^3.8.4"
 mypy = "^0.812"
+pytest-cov = "^2.11.1"
+coverage = "^5.5"
 
 [tool.poetry.scripts]
 chapter-align = "chapter_align.__main__:main"
