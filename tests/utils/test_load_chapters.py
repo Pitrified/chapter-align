@@ -31,6 +31,14 @@ def test_load_chapter_no_body(test_data_folder: Path) -> None:
 
 
 def test_load_chapter_01(test_data_folder: Path) -> None:
-    r"""Fail when the chapter file does not contain a body"""
+    r"""Load a sample chapter"""
     chapter_sample = "chapter_sample_01.xhtml"
-    load_chapter(test_data_folder, chapter_template=chapter_sample, chapter_index=0)
+    sentences = load_chapter(
+        test_data_folder, chapter_template=chapter_sample, chapter_index=0
+    )
+    assert sentences[0].norm_tra == "A short sentence."
+    assert sentences[1].norm_tra == "Another short sentence."
+    assert (
+        sentences[2].norm_tra
+        == "  1. “The Yellow Room”, with its one window and its one door opening into the laboratory."
+    )

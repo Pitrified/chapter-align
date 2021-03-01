@@ -32,7 +32,7 @@ class Sentence:
         self.len_norm_tra = len(self.norm_tra)
 
     def __str__(self) -> str:
-        r"""MAKEDOC: what is __str__ doing?"""
+        r"""Return the readable string for the sentence"""
         logg = logging.getLogger(f"c.{__name__}.__str__")
         # logg.setLevel("DEBUG")
         logg.debug("Start __str__")
@@ -40,7 +40,7 @@ class Sentence:
         return self.norm_tra
 
     def __repr__(self) -> str:
-        r"""MAKEDOC: what is __repr__ doing?"""
+        r"""Return more informations on the sentence"""
         logg = logging.getLogger(f"c.{__name__}.__repr__")
         # logg.setLevel("DEBUG")
         logg.debug("Start __repr__")
