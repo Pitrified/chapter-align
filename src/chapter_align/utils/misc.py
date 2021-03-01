@@ -29,13 +29,23 @@ def setup_logger(
     logroot.addHandler(module_console_handler)
 
 
-def get_package_root_folder() -> Path:
-    r"""Gets the root folder of the project"""
-    # logg = logging.getLogger(f"c.{__name__}.get_package_root_folder")
+def get_package_folders(which_folder: str = "root") -> Path:
+    r"""Gets the relevant folders of the project"""
+    logg = logging.getLogger(f"c.{__name__}.get_package_folders")
     # logg.setLevel("INFO")
-    # logg.debug("Start get_package_root_folder")
+    logg.debug("Start get_package_folders")
 
     this_file_folder = Path(__file__).absolute().parent
-    # logg.debug(f"{this_file_folder=}")
+    logg.debug(f"{this_file_folder=}")
+
     package_root_folder = this_file_folder.parent.parent.parent
-    return package_root_folder
+
+    if which_folder == "root":
+        return package_root_folder
+
+    elif which_folder == "tests":
+        package_tests_folder = package_root_folder / "tests"
+        return package_tests_folder
+
+    else:
+        raise KeyError(f"Not recognized {which_folder}")

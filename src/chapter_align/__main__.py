@@ -3,7 +3,7 @@ import logging
 import click
 
 from . import __version__
-from .utils.misc import get_package_root_folder  # type: ignore
+from .utils.misc import get_package_folders  # type: ignore
 from .utils.misc import setup_logger
 from .align import align_book
 
@@ -34,7 +34,7 @@ def main(log_level_debug: str, log_level_type: str) -> None:
     logg = logging.getLogger(f"c.{__name__}.main")
     logg.debug("Starting main")
 
-    package_root_folder = get_package_root_folder()
+    package_root_folder = get_package_folders()
     logg.debug(f"{package_root_folder=}")
     data_folder = package_root_folder / "data"
 
