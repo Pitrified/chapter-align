@@ -18,24 +18,22 @@ def test_load_chapter_wrong_path() -> None:
     r"""Fail when the chapter file does not exist"""
     with pytest.raises(FileNotFoundError, match="Chapter not found"):
         wrong_path = Path("definitelynotavalidpathforreal")
-        load_chapter(wrong_path, chapter_template="", chapter_index=0)
+        load_chapter(wrong_path)
 
 
 def test_load_chapter_no_body(test_data_folder: Path) -> None:
     r"""Fail when the chapter file does not contain a body"""
     with pytest.raises(RuntimeError, match="Body not found"):
         chapter_no_body = "chapter_no_body.xhtml"
-        load_chapter(
-            test_data_folder, chapter_template=chapter_no_body, chapter_index=0
-        )
+        chapter_path = test_data_folder / chapter_no_body
+        load_chapter(chapter_path)
 
 
 def test_load_chapter_01(test_data_folder: Path) -> None:
     r"""Load a sample chapter"""
     chapter_sample = "chapter_sample_01.xhtml"
-    sentences = load_chapter(
-        test_data_folder, chapter_template=chapter_sample, chapter_index=0
-    )
+    chapter_path = test_data_folder / chapter_sample
+    sentences = load_chapter(chapter_path)
     assert sentences[0].norm_tra == "A short sentence."
     assert sentences[1].norm_tra == "Another short sentence."
     assert (

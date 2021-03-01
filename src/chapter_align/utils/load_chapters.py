@@ -1,5 +1,6 @@
 from pathlib import Path
 import logging
+
 # import typing as ty
 
 from bs4 import BeautifulSoup  # type: ignore
@@ -8,16 +9,11 @@ from .Sentence import Sentence
 from .SentenceList import SentenceList
 
 
-def load_chapter(
-    lang_folder: Path, chapter_template: str, chapter_index: int
-) -> SentenceList:
+def load_chapter(chapter_path: Path) -> SentenceList:
     r"""Load a chapter and split it in Sentences"""
     logg = logging.getLogger(f"c.{__name__}.load_chapter")
     # logg.setLevel("DEBUG")
     logg.debug("Start load_chapter")
-
-    chapter_path = lang_folder / chapter_template.format(chapter_index)
-    logg.debug(f"{chapter_path=}")
 
     if not chapter_path.exists():
         raise FileNotFoundError(f"Chapter not found at {chapter_path}")

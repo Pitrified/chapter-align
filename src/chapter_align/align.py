@@ -48,22 +48,34 @@ def align_book(
 
     """
     logg = logging.getLogger(f"c.{__name__}.align_book")
-    logg.setLevel("DEBUG")
+    # logg.setLevel("DEBUG")
     logg.debug("Start align_book")
 
-    chapter_index = 1
+    chapter_index = 6
     # TODO, the starting index sould be different for the two books
 
     # skip_interval = 5
 
+    # load the chapter for l0
     lang_folder0 = book_folder / languages[0]
-    sent0 = load_chapter(lang_folder0, chapter_templates[0], chapter_index)
+    chapter_name0 = chapter_templates[0].format(chapter_index)
+    chapter_path0 = lang_folder0 / chapter_name0
+    logg.debug(f"{chapter_path0=}")
+
+    sent0 = load_chapter(chapter_path0)
+
     recap = f"len(sent0): {len(sent0)}"
     recap += f" sent0.tot_chars: {sent0.tot_chars}"
     logg.debug(recap)
 
+    # load the chapter for l1
     lang_folder1 = book_folder / languages[1]
-    sent1 = load_chapter(lang_folder1, chapter_templates[1], chapter_index)
+    chapter_name1 = chapter_templates[1].format(chapter_index)
+    chapter_path1 = lang_folder1 / chapter_name1
+    logg.debug(f"{chapter_path1=}")
+
+    sent1 = load_chapter(chapter_path1)
+
     recap = f"len(sent1): {len(sent1)}"
     recap += f" sent1.tot_chars: {sent1.tot_chars}"
     logg.debug(recap)
@@ -110,7 +122,7 @@ def align_book(
     composed.append(sent0[0])
 
     while added0 < len(sent0) or added1 < len(sent1):
-        recap = f"\n>>>>>> {added0} {added1}"
+        recap = f">>>>>> {added0} {added1}"
         logg.debug(recap)
 
         old_tot0 = inc_len0[added0 - 1]
