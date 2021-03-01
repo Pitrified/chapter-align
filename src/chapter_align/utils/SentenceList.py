@@ -51,3 +51,12 @@ class SentenceList:
         if not -len(self._inner_list) <= index < len(self._inner_list):
             return self.placeholder_sentence
         return self._inner_list[index]
+
+    def __iter__(self) -> ty.Iterator[Sentence]:
+        r"""Iterate over the inner sentence list"""
+        # https://stackoverflow.com/a/37349475
+        logg = logging.getLogger(f"c.{__name__}.__iter__")
+        # logg.setLevel("DEBUG")
+        logg.debug("Start __iter__")
+        for sent in self._inner_list:
+            yield sent

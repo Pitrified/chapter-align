@@ -34,3 +34,10 @@ def test_sentence_list_1_totchar(a_sentence_list: SentenceList) -> None:
     r"""Get the length in chars"""
     tot_chars = a_sentence_list[0].len_norm_tra + a_sentence_list[1].len_norm_tra
     assert a_sentence_list.tot_chars == tot_chars
+
+
+def test_sentence_list_1_iterator(a_sentence_list: SentenceList) -> None:
+    r"""Iterate over the sentence list"""
+    sl_iter = iter(a_sentence_list)
+    assert next(sl_iter).norm_tra == "A short sentence."
+    assert next(sl_iter).norm_tra == "Another short sentence."

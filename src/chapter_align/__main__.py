@@ -39,13 +39,16 @@ def main(log_level_debug: str, log_level_type: str) -> None:
     data_folder = package_root_folder / "data"
 
     # will all be command line args
+
     author_name = "leroux"
     book_name = "yellow_room"
-    languages = "english", "french"
-    chapter_template = "ch_{:04d}.xhtml"
-    chapter_templates = chapter_template, chapter_template
-
     book_folder = data_folder / author_name / book_name
+
+    languages = "english", "french"
+    # chapter_template0 = "ch_{:04d}_nomap.xhtml"
+    chapter_template0 = "ch_{:04d}.xhtml"
+    chapter_template1 = "ch_{:04d}.xhtml"
+    chapter_templates = chapter_template0, chapter_template1
 
     align_book(book_folder, languages, chapter_templates)
 
