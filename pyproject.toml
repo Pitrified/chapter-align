@@ -11,6 +11,7 @@ repository = "https://github.com/Pitrifier/chapter-align"
 [tool.poetry.dependencies]
 python = "^3.9"
 click = "^7.1.2"
+beautifulsoup4 = "^4.9.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"

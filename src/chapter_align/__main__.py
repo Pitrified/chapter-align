@@ -15,7 +15,7 @@ from .align import align_book
     type=click.Choice(
         ["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"], case_sensitive=False
     ),
-    default="DEBUG",
+    default="WARN",
     help="Level for the debugging logger",
     show_default=True,
 )
@@ -38,16 +38,16 @@ def main(log_level_debug: str, log_level_type: str) -> None:
     logg.debug(f"{package_root_folder=}")
     data_folder = package_root_folder / "data"
 
+    # will all be command line args
     author_name = "leroux"
     book_name = "yellow_room"
-    language1 = "english"
-    language2 = "french"
+    languages = "english", "french"
+    chapter_template = "ch_{:04d}.xhtml"
+    chapter_templates = chapter_template, chapter_template
 
     book_folder = data_folder / author_name / book_name
 
-    chapter_template = "ch_{:04d}"
-
-    align_book(book_folder, language1, language2, chapter_template)
+    align_book(book_folder, languages, chapter_templates)
 
 
 if __name__ == "__main__":  # pragma: no cover
