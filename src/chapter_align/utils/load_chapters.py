@@ -22,7 +22,7 @@ def load_chapter(chapter_path: Path) -> SentenceList:
 
     parsed_body = parsed_html.body
     if parsed_body is None:
-        raise RuntimeError("Body not found in the chapter text")
+        raise RuntimeError(f"Body not found in the chapter text {chapter_path}")
 
     sentences = SentenceList()
 

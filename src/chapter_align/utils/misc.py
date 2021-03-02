@@ -44,8 +44,12 @@ def get_package_folders(which_folder: str = "root") -> Path:
         return package_root_folder
 
     elif which_folder == "tests":
-        package_tests_folder = package_root_folder / "tests"
-        return package_tests_folder
+        tests_folder = package_root_folder / "tests"
+        return tests_folder
+
+    elif which_folder == "template_epub":
+        template_epub_folder = package_root_folder / "assets" / "template_epub"
+        return template_epub_folder
 
     else:
         raise KeyError(f"Not recognized {which_folder}")

@@ -19,8 +19,14 @@ def test_get_package_folders() -> None:
 
 def test_get_package_folders_tests() -> None:
     """It gets the package tests folder"""
-    package_tests_folder = get_package_folders("tests")
-    assert package_tests_folder.name == "tests"
+    tests_folder = get_package_folders("tests")
+    assert tests_folder.name == "tests"
+
+
+def test_get_package_folders_epub() -> None:
+    """It gets the package template epub folder"""
+    template_epub_folder = get_package_folders("template_epub")
+    assert template_epub_folder.name == "template_epub"
 
 
 def test_get_package_folders_not_valid_key() -> None:
