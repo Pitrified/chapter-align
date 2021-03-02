@@ -18,11 +18,12 @@ def align_book(
 ) -> None:
     r"""Align every chapter in a book
 
-    l1 has to be after l0
+    l1 paragraphs have to be after l0
     we track tot_len0 and scaled_len1
 
-    if the old tot_len0 is still smaller than scaled_len1
+    if the old tot_len0 is smaller than scaled_len1
         add the l0 paragraph
+        (we want to read the l0 paragraph before the l1)
     else
         add the l1 paragraph
 
@@ -51,7 +52,7 @@ def align_book(
 
     # get the chapter output folder
     composed_folder = book_folder / "composed"
-    if not composed_folder.exists():
+    if not composed_folder.exists():  # pragma: nocover
         composed_folder.mkdir(parents=True, exist_ok=True)
 
     # get the template path
@@ -174,7 +175,7 @@ def align_book(
                 # loop happily quits
                 # or maybe it's 2am and I should check again
 
-                if available1 is False:
+                if available1 is False:  # pragma: nocover - this should not happen
                     recap = f">>>>>> {added0} {added1}"
                     recap += " Something strange happened while composing"
                     recap += " {chapter_path0=}"
@@ -208,11 +209,11 @@ def align_book(
             logg.debug(recap)
 
         # get the chapter output path
-        composed_chapter_name = f"ch_{chapter_index:04d}.xhtml"
+        composed_chapter_name = f"ch_{chapter_index+1:04d}.xhtml"
         composed_chapter_path = composed_folder / composed_chapter_name
 
         # build a vague chapter title
-        chapter_title = f"Chapter {chapter_index}"
+        chapter_title = f"Chapter {chapter_index+1}"
 
         # create the full chapter text
         full_ch_text = tmpl_ch.format(

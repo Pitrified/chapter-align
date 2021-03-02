@@ -70,7 +70,12 @@ def main(log_level_debug: str, log_level_type: str) -> None:
         book_name_full,
     )
 
-    build_epub(book_folder)
+    build_epub(
+        book_folder,
+        tot_chapter_num,
+        author_name_full,
+        book_name_full,
+    )
 
 
 if __name__ == "__main__":  # pragma: no cover
