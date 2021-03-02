@@ -23,7 +23,7 @@ class EpubBuilder:
     ) -> None:
         r"""MAKEDOC: what is __init__ doing?"""
         logg = logging.getLogger(f"c.{__name__}.__init__")
-        logg.setLevel("DEBUG")
+        # logg.setLevel("DEBUG")
         logg.debug("Start __init__")
 
         self._composed_folder = composed_folder
@@ -42,7 +42,7 @@ class EpubBuilder:
         make the zip and the epub
         """
         logg = logging.getLogger(f"c.{__name__}.do_build")
-        logg.setLevel("DEBUG")
+        # logg.setLevel("DEBUG")
         logg.debug("Start do_build")
 
         self._clean_title()
@@ -70,7 +70,7 @@ class EpubBuilder:
     def _clean_title(self) -> None:
         r"""MAKEDOC: what is _clean_title doing?"""
         logg = logging.getLogger(f"c.{__name__}._clean_title")
-        logg.setLevel("DEBUG")
+        # logg.setLevel("DEBUG")
         logg.debug("Start _clean_title")
 
         # substitute spaces with underscores
@@ -271,7 +271,7 @@ class EpubBuilder:
     def _copy_static(self) -> None:
         r"""MAKEDOC: what is _copy_static doing?"""
         logg = logging.getLogger(f"c.{__name__}._copy_static")
-        logg.setLevel("DEBUG")
+        # logg.setLevel("DEBUG")
         logg.debug("Start _copy_static")
 
         meta_inf_folder = self._epub_files_folder / "META-INF"
@@ -291,7 +291,7 @@ class EpubBuilder:
     def _create_epub_file(self) -> None:
         r"""MAKEDOC: what is _create_epub_file doing?"""
         logg = logging.getLogger(f"c.{__name__}._create_epub_file")
-        logg.setLevel("DEBUG")
+        # logg.setLevel("DEBUG")
         logg.debug("Start _create_epub_file")
 
         # the epub final name
@@ -299,7 +299,7 @@ class EpubBuilder:
         self.epub_file_path = self.epub_out_folder / epub_file_name
         if self.epub_file_path.exists():  # pragma: nocover
             self.epub_file_path.unlink()
-        logg.debug(f"self.epub_file_path: {self.epub_file_path}")
+        logg.info(f"self.epub_file_path: {self.epub_file_path}")
 
         # the zip archive name
         zip_file_name = self.clean_title + ".zip"
@@ -334,8 +334,8 @@ def build_epub(
 ) -> None:
     r"""MAKEDOC: what is build_epub doing?"""
     logg = logging.getLogger(f"c.{__name__}.build_epub")
-    logg.setLevel("DEBUG")
-    logg.debug("Start build_epub")
+    # logg.setLevel("DEBUG")
+    logg.info("\nStart build_epub")
 
     # the folder where the chapters are
     composed_folder = book_folder / "composed"

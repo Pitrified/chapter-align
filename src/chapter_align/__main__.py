@@ -1,3 +1,4 @@
+from pathlib import Path
 import logging
 
 import click
@@ -10,55 +11,156 @@ from .build_epub import build_epub
 
 
 @click.command()
+# book base folder
 @click.option(
-    "-lld",
+    "--book_base_folder",
+    type=str,
+    default="_data",
+    help="The path to the book folder, that should contain the two language folders.",
+    show_default=True,
+)
+# languages
+@click.option(
+    "--language0",
+    type=str,
+    default="english",
+    help="The language tag (the subfolder) for l0.",
+    show_default=True,
+)
+@click.option(
+    "--language1",
+    type=str,
+    default="french",
+    help="The language tag (the subfolder) for l1.",
+    show_default=True,
+)
+# chapter template
+@click.option(
+    "--ch_template0",
+    type=str,
+    default="ch_{:04d}.xhtml",
+    help="The chapters' template for l0.",
+    show_default=True,
+)
+@click.option(
+    "--ch_template1",
+    type=str,
+    default="ch_{:04d}.xhtml",
+    help="The chapters' template for l1.",
+    show_default=True,
+)
+# chapter start index
+@click.option(
+    "--ch_start_index0",
+    type=int,
+    default=0,
+    help="The first chapter index for l0.",
+    show_default=True,
+)
+@click.option(
+    "--ch_start_index1",
+    type=int,
+    default=0,
+    help="The first chapter index for l1.",
+    show_default=True,
+)
+# tot number of chapters
+@click.option(
+    "--tot_chapter_num",
+    type=int,
+    default=10,
+    help="The number of chapters.",
+    show_default=True,
+)
+# book author
+@click.option(
+    "--author_name",
+    type=str,
+    default="Author",
+    help="The author of the book.",
+    show_default=True,
+)
+# book author
+@click.option(
+    "--book_title",
+    type=str,
+    default="Title",
+    help="The title of the book.",
+    show_default=True,
+)
+# log options
+@click.option(
     "--log_level_debug",
     type=click.Choice(
         ["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"], case_sensitive=False
     ),
     default="WARN",
-    help="Level for the debugging logger",
+    help="Level for the debugging logger.",
     show_default=True,
 )
 @click.option(
-    "-llt",
     "--log_level_type",
     type=click.Choice(["anlm", "nlm", "lm", "nm", "m"], case_sensitive=False),
     default="m",
-    help="Message format for the debugging logger",
+    help="Message format for the debugging logger.",
     show_default=True,
 )
 @click.version_option(version=__version__)
-def main(log_level_debug: str, log_level_type: str) -> None:
-    r"""The main CLI entry point to the aligner"""
+def main(
+    book_base_folder: str,
+    ch_template0: str,
+    ch_template1: str,
+    ch_start_index0: int,
+    ch_start_index1: int,
+    language0: str,
+    language1: str,
+    tot_chapter_num: int,
+    author_name: str,
+    book_title: str,
+    log_level_debug: str,
+    log_level_type: str,
+) -> None:
+    r"""Align two sets of chapters in different languages."""
     setup_logger(log_level_debug, log_level_type)
     logg = logging.getLogger(f"c.{__name__}.main")
     logg.debug("Starting main")
 
-    package_root_folder = get_package_folders()
-    logg.debug(f"{package_root_folder=}")
-    data_folder = package_root_folder / "data"
+    # use standard values for testing in data folder
+    if book_base_folder == "_data":
+        package_root_folder = get_package_folders()
+        logg.debug(f"{package_root_folder=}")
+        data_folder = package_root_folder / "data"
 
-    # will all be command line args
+        author_name_tag = "leroux"
+        book_name_tag = "yellow_room"
+        book_folder = data_folder / author_name_tag / book_name_tag
 
-    author_name_tag = "leroux"
-    book_name_tag = "yellow_room"
-    book_folder = data_folder / author_name_tag / book_name_tag
+        author_name_full = "Gaston Leroux"
+        book_name_full = "Le Mystère de la chambre jaune"
 
-    author_name_full = "Gaston Leroux"
-    book_name_full = "Le Mystère de la chambre jaune"
+        languages = "english", "french"
 
-    languages = "english", "french"
+        # chapter_template0 = "ch_{:04d}_nomap.xhtml"
+        chapter_template0 = "ch_{:04d}.xhtml"
+        chapter_template1 = "main{}.xml"
+        chapter_templates = chapter_template0, chapter_template1
 
-    # chapter_template0 = "ch_{:04d}_nomap.xhtml"
-    chapter_template0 = "ch_{:04d}.xhtml"
-    # chapter_template1 = "ch_{:04d}.xhtml"
-    chapter_template1 = "main{}.xml"
-    chapter_templates = chapter_template0, chapter_template1
+        chapter_start_indexes = 1, 0
 
-    chapter_start_indexes = 1, 0
+        tot_chapter_num = 29
 
-    tot_chapter_num = 29
+    # use cli args
+    else:
+
+        # NO DATA SANITATION WE DIE LIKE MEN
+        book_folder = Path(book_base_folder).expanduser().absolute()
+        author_name_full = author_name
+        book_name_full = book_title
+
+        languages = language0, language1
+
+        chapter_templates = ch_template0, ch_template1
+        chapter_start_indexes = ch_start_index0, ch_start_index1
 
     align_book(
         book_folder,

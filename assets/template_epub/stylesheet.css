@@ -42,3 +42,10 @@
     text-align: justify
 }
 
+.byline {
+    display: block;
+    font-family: serif;
+    margin: 1em 0;
+    padding: 0;
+    text-align: center
+}

@@ -44,7 +44,7 @@ def align_book(
     """
     logg = logging.getLogger(f"c.{__name__}.align_book")
     # logg.setLevel("DEBUG")
-    logg.debug("Start align_book")
+    logg.info("\nStart align_book")
 
     #############################################################
     # build the input/output paths
