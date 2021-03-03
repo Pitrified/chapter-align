@@ -1,18 +1,25 @@
 # Chapter align TODOs
 
+### Align
+
+* Split in separate function the analysis of a single chapter.
+
 ### CLI
+
+* Flags to do only align/build epub.
+* Indexes for first/last chapter to analyze.
 
 ##### Done
 
-* Finish a usable cli
+* Finish a usable cli.
 
 ### Docs
 
-* Add docs with nox + sphinx
+* Add docs with nox + sphinx.
 
 ### Nox
 
-* Add a lot more checks (eg on the docstrings, flake-*)
+* Add a lot more checks (eg on the docstrings, flake-*).
 
 ### Epub
 
@@ -20,5 +27,8 @@
   so that the correct dictionary is used by the Kindle.
   It should be line 5 in `tmpl_content.opf`:
   `<dc:language>en</dc:language>`
+  Set it based on l1.
+* There is a mysterious lang attribute that can be put in `<p>` tags, maybe two
+  dictionaries can be used?
 * In the original chapters a lot of classes are used,
   the styles should be copied.
