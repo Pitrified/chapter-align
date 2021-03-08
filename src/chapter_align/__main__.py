@@ -15,7 +15,7 @@ from .build_epub import build_epub
 @click.option(
     "--book_base_folder",
     type=str,
-    default="_data",
+    default=get_package_folders() / "data" / "leroux" / "yellow_room",
     help="The path to the book folder, that should contain the two language folders.",
     show_default=True,
 )
@@ -45,7 +45,7 @@ from .build_epub import build_epub
 @click.option(
     "--ch_template1",
     type=str,
-    default="ch_{:04d}.xhtml",
+    default="main{}.xml",
     help="The chapters' template for l1.",
     show_default=True,
 )
@@ -53,7 +53,7 @@ from .build_epub import build_epub
 @click.option(
     "--ch_start_index0",
     type=int,
-    default=0,
+    default=1,
     help="The first chapter index for l0.",
     show_default=True,
 )
@@ -68,7 +68,7 @@ from .build_epub import build_epub
 @click.option(
     "--tot_chapter_num",
     type=int,
-    default=10,
+    default=29,
     help="The number of chapters.",
     show_default=True,
 )
@@ -76,7 +76,7 @@ from .build_epub import build_epub
 @click.option(
     "--author_name",
     type=str,
-    default="Author",
+    default="Gaston Leroux",
     help="The author of the book.",
     show_default=True,
 )
@@ -84,7 +84,7 @@ from .build_epub import build_epub
 @click.option(
     "--book_title",
     type=str,
-    default="Title",
+    default="Le Mystère de la chambre jaune - Composed",
     help="The title of the book.",
     show_default=True,
 )
@@ -125,42 +125,13 @@ def main(
     logg = logging.getLogger(f"c.{__name__}.main")
     logg.debug("Starting main")
 
-    # use standard values for testing in data folder
-    if book_base_folder == "_data":
-        package_root_folder = get_package_folders()
-        logg.debug(f"{package_root_folder=}")
-        data_folder = package_root_folder / "data"
+    book_folder = Path(book_base_folder).expanduser().absolute()
+    author_name_full = author_name
+    book_name_full = book_title
+    languages = language0, language1
 
-        author_name_tag = "leroux"
-        book_name_tag = "yellow_room"
-        book_folder = data_folder / author_name_tag / book_name_tag
-
-        author_name_full = "Gaston Leroux"
-        book_name_full = "Le Mystère de la chambre jaune"
-
-        languages = "english", "french"
-
-        # chapter_template0 = "ch_{:04d}_nomap.xhtml"
-        chapter_template0 = "ch_{:04d}.xhtml"
-        chapter_template1 = "main{}.xml"
-        chapter_templates = chapter_template0, chapter_template1
-
-        chapter_start_indexes = 1, 0
-
-        tot_chapter_num = 29
-
-    # use cli args
-    else:
-
-        # NO DATA SANITATION WE DIE LIKE MEN
-        book_folder = Path(book_base_folder).expanduser().absolute()
-        author_name_full = author_name
-        book_name_full = book_title
-
-        languages = language0, language1
-
-        chapter_templates = ch_template0, ch_template1
-        chapter_start_indexes = ch_start_index0, ch_start_index1
+    chapter_templates = ch_template0, ch_template1
+    chapter_start_indexes = ch_start_index0, ch_start_index1
 
     align_book(
         book_folder,
