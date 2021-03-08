@@ -19,6 +19,7 @@ flake8 = "^3.8.4"
 mypy = "^0.812"
 pytest-cov = "^2.11.1"
 coverage = "^5.5"
+nox = "^2020.12.31"
 
 [tool.poetry.scripts]
 chapter-align = "chapter_align.__main__:main"
