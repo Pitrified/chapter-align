@@ -86,8 +86,7 @@ def align_chapter_basic(
     composed.append(sent0[0])
 
     # the aligned list of indexes
-    composed_indexes: ty.List[ty.Tuple[int, int]] = []
-    composed_indexes.append((0, 0))
+    composed_indexes: ty.List[ty.Tuple[int, int]] = [(0, 0)]
 
     # while there are sentences left on either list
     while next0 < len(sent0) and next1 < len(sent1):
@@ -257,8 +256,8 @@ def interactive_hints(
             i0_min = max(curr_hi0 - curr_window_size0, 0)
             i0_max = min(curr_hi0 + curr_window_size0, len(sent0) - 1)
             logg.debug(f"i0_min: {i0_min} i0_max: {i0_max} cws {curr_window_size0}")
-            for hi0 in range(i0_min, i0_max + 1):
-                logg.debug(f"\n{vt}sent0[{hi0}]:\n{sent0[hi0]}")
+            for hi0_show in range(i0_min, i0_max + 1):
+                logg.debug(f"\n{vt}sent0[{hi0_show}]:\n{sent0[hi0_show]}")
 
             # the range of l1 sentences to pick from
             i1_min = max(i1 - curr_window_size1, 0)
@@ -439,6 +438,7 @@ def align_with_hints(
                 rel_next0 += 1
 
         recap = f"> rel_next1 {rel_next1: 2d} chunk_len1 {chunk_len1: 2d}"
+        logg.debug(recap)
         if rel_next1 < chunk_len1:
             logg.debug("  finish 1")
             while rel_next1 < chunk_len1:
