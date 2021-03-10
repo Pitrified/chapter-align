@@ -1,10 +1,45 @@
 # Chapter align TODOs
 
-### Align
+## Misc
+
+* Colors for the prompt.
+
+## Test
+
+* Test the interactive prompt with a
+  [context manager](https://stackoverflow.com/a/36491341/2237151).
+
+```python
+import sys
+from contextlib import contextmanager
+
+@contextmanager
+def replace_stdin(target):
+    orig = sys.stdin
+    sys.stdin = target
+    yield
+    sys.stdin = orig
+
+    # use it with
+with replace_stdin(StringIO("some preprogrammed input")):
+    module.call_function()
+```
+
+## Align
+
+* Do not generate `hint_indexes0` but add 5 to wherever you end up to.
+* Show only beginning and end of the sentences, option to show all.
+* The prompts to the user should not be on the debug logger,
+  but on a separate one.
+* Option to make hint window bigger (`w+1`).
+* Shift all subsequent links using the acquired hints.
+* Check if the combined chapter exists already.
+
+##### Done
 
 * Split in separate function the analysis of a single chapter.
 
-### CLI
+## CLI
 
 * Flags to do only align/build epub.
 * Indexes for first/last chapter to analyze.
@@ -13,15 +48,15 @@
 
 * Finish a usable cli.
 
-### Docs
+## Docs
 
 * Add docs with nox + sphinx.
 
-### Nox
+## Nox
 
 * Add a lot more checks (eg on the docstrings, flake-*).
 
-### Epub
+## Epub
 
 * Somewhere there is a metadata regarding the language that must be set
   so that the correct dictionary is used by the Kindle.
