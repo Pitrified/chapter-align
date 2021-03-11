@@ -7,11 +7,57 @@ from bs4 import BeautifulSoup  # type: ignore
 import pycountry  # type: ignore
 from termcolor import colored
 
-# from .utils.Sentence import Sentence
 # from .utils.customhtmlparser import MyHTMLParser
+from .utils.Sentence import Sentence
 from .utils.SentenceList import SentenceList
 from .utils.load_chapters import load_chapter
 from .utils.misc import get_package_folders
+
+
+def color_in_dict(
+    color_sent: Sentence, match_sentences: ty.List[Sentence], color: str = "yellow"
+) -> str:
+    r"""MAKEDOC: what is color_in_dict doing?"""
+    logg = logging.getLogger(f"c.{__name__}.color_in_dict")
+    # logg.setLevel("DEBUG")
+    logg.debug("Start color_in_dict")
+
+    # build set of words in match_sent
+    words_seen = set()
+    for match_sent in match_sentences:
+        for word in match_sent.norm_tra.split(" "):
+            # keep vaguely interesting words
+            if len(word) < 4:
+                continue
+            words_seen.add(word)
+
+    logg.debug(f"words_seen: {words_seen}")
+
+    color_str = ""
+    for word in color_sent.norm_tra.split(" "):
+        matched = False
+        for match_word in words_seen:
+            frac_match = int(len(match_word) * 0.6)
+
+            # keep vaguely interesting matches
+            if frac_match < 3:
+                continue
+
+            match_word = match_word.lower()
+            word = word.lower()
+
+            if word.startswith(match_word[:frac_match]):
+                logg.debug(f"word: {word} matches {match_word}")
+                matched = True
+
+        # if the beginning of a seen word is in the current word, color it
+        # if match_word[:frac_match] in word:
+        if matched:
+            color_str += colored(f"{word} ", color)
+        else:
+            color_str += f"{word} "
+
+    return color_str
 
 
 def align_chapter_basic(
@@ -240,8 +286,8 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
     # the hint will link a sentence from l0 to l1
     hints: ty.List[ty.Tuple[int, int]] = []
 
-    window_size0 = 0
-    window_size1 = 3
+    window_size0 = 1
+    window_size1 = 4
 
     for hi0 in hint_indexes0:
 
@@ -254,6 +300,8 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
 
             # extract the central index for l1
             i1 = link0to1[curr_hi0]
+
+            # line to split the flow
             recap = f"\n{vt*3}"
             recap += colored(f"curr_hi0: {curr_hi0} -> {i1}", "cyan")
             recap += f"{tv*3}"
@@ -271,8 +319,15 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
                     recap += f"{tv}"
                 else:
                     recap += f"sent0[{hi0_show}]:"
-                recap += f"\n{sent0[hi0_show]}"
+                # recap += f"\n{sent0[hi0_show]}"
+                recap += f"\n{color_in_dict(sent0[hi0_show], [sent1[i1]])}"
                 logg.debug(recap)
+
+            # line to split the flow
+            recap = f"\n{vt*3}"
+            recap += colored(f"{vt}{tv}", "cyan")
+            recap += f"{tv*3}"
+            logg.debug(recap)
 
             # the range of l1 sentences to pick from
             i1_min = max(i1 - curr_window_size1, 0)
@@ -280,11 +335,14 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
             for hi1 in range(i1_min, i1_max + 1):
                 recap = f"\n{vt}"
                 if hi1 == i1:
-                    recap += colored(f"sent1[{hi1-i1}] ({hi1}):", "green")
+                    recap += colored(
+                        f"sent1[{hi1-i1}] ({hi1}):", "green", attrs=["bold"]
+                    )
                     recap += f"{tv}"
                 else:
                     recap += f"sent1[{hi1-i1}] ({hi1}):"
-                recap += f"\n{sent1[hi1]}"
+                # recap += f"\n{sent1[hi1]}"
+                recap += f"\n{color_in_dict(sent1[hi1], [sent0[curr_hi0]])}"
                 logg.debug(recap)
 
             prompt = "Change the l0 sentence: s0[NUM]."
