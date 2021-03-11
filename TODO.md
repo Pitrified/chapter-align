@@ -3,11 +3,39 @@
 ## Misc
 
 * Colors for the prompt.
+* Merge CSS from the two originals, keep the `l1` in conflicts (and warn the user).
+
+## NMT
+
+### Model
+
+* Package in the contents of this tutorial:
+    [Neural machine translation with attention](https://www.tensorflow.org/tutorials/text/nmt_with_attention)
+* Fix this `KeyError`, use `UNK` or a similar fallback:
+
+```python
+Traceback (most recent call last):
+  File "nmt_with_attention.py", line 712, in <module>
+    translate("trata de averiguarlo.")
+  File "nmt_with_attention.py", line 670, in translate
+    result, sentence, attention_plot = evaluate(sentence)
+  File "nmt_with_attention.py", line 610, in evaluate
+    inputs = [inp_lang.word_index[i] for i in sentence.split(" ")]
+  File "nmt_with_attention.py", line 610, in <listcomp>
+    inputs = [inp_lang.word_index[i] for i in sentence.split(" ")]
+KeyError: 'trata'
+```
+
+### Install
+
+* Optional install of `tensorflow`:
+    [Poetry](https://python-poetry.org/docs/pyproject/#extras),
+    [SO](https://stackoverflow.com/a/60990574/2237151).
 
 ## Test
 
 * Test the interactive prompt with a
-  [context manager](https://stackoverflow.com/a/36491341/2237151).
+    [context manager](https://stackoverflow.com/a/36491341/2237151).
 
 ```python
 import sys
@@ -30,7 +58,7 @@ with replace_stdin(StringIO("some preprogrammed input")):
 * Do not generate `hint_indexes0` but add 5 to wherever you end up to.
 * Show only beginning and end of the sentences, option to show all.
 * The prompts to the user should not be on the debug logger,
-  but on a separate one.
+    but on a separate one.
 * Shift all subsequent links using the acquired hints.
 
 ##### Done
@@ -42,7 +70,9 @@ with replace_stdin(StringIO("some preprogrammed input")):
 ## CLI
 
 * Flags to do only align/build epub.
+* Also flags for training the model.
 * Indexes for first/last chapter to analyze.
+* Single option for `l01`, pass a list.
 
 ##### Done
 
@@ -59,12 +89,12 @@ with replace_stdin(StringIO("some preprogrammed input")):
 ## Epub
 
 * Somewhere there is a metadata regarding the language that must be set
-  so that the correct dictionary is used by the Kindle.
-  It should be line 5 in `tmpl_content.opf`:
-  `<dc:language>en</dc:language>`
-  Set it based on l1.
-  Also somewhere else, look for `en`.
+    so that the correct dictionary is used by the Kindle.
+    It should be line 5 in `tmpl_content.opf`:
+    `<dc:language>en</dc:language>`
+    Set it based on l1.
+    Also somewhere else, look for `en`.
 * There is a mysterious lang attribute that can be put in `<p>` tags, maybe two
-  dictionaries can be used?
+    dictionaries can be used?
 * In the original chapters a lot of classes are used,
-  the styles should be copied.
+    the styles should be copied.
