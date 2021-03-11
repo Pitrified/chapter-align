@@ -2,6 +2,8 @@ from pathlib import Path
 import logging
 
 import click
+import colorama  # type: ignore
+import pycountry  # type: ignore
 
 from . import __version__
 from .utils.misc import get_package_folders  # type: ignore
@@ -125,6 +127,8 @@ def main(
     logg = logging.getLogger(f"c.{__name__}.main")
     logg.debug("Starting main")
 
+    colorama.init()
+
     book_folder = Path(book_base_folder).expanduser().absolute()
     author_name_full = author_name
     book_name_full = book_title
@@ -143,11 +147,16 @@ def main(
         book_name_full,
     )
 
+    lang1 = pycountry.languages.get(name=languages[1])
+    logg.debug(f"lang1: {lang1}")
+    lang_alpha2_tag1 = lang1.alpha_2
+
     build_epub(
         book_folder,
         tot_chapter_num,
         author_name_full,
         book_name_full,
+        lang_alpha2_tag1,
     )
 
 

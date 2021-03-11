@@ -9,10 +9,10 @@ from .Sentence import Sentence
 from .SentenceList import SentenceList
 
 
-def load_chapter(chapter_path: Path) -> SentenceList:
+def load_chapter(chapter_path: Path, lang_alpha2_tag: str) -> SentenceList:
     r"""Load a chapter and split it in Sentences"""
     logg = logging.getLogger(f"c.{__name__}.load_chapter")
-    # logg.setLevel("DEBUG")
+    logg.setLevel("DEBUG")
     logg.debug("Start load_chapter")
 
     if not chapter_path.exists():
@@ -27,7 +27,12 @@ def load_chapter(chapter_path: Path) -> SentenceList:
     sentences = SentenceList()
 
     for i, par in enumerate(parsed_body.find_all("p")):
-        logg.debug(f"\n>>>>>> par {i}\n{par}")
+
+        # add lang info in the tag
+        par["lang"] = lang_alpha2_tag
+        par["class"] = par.get("class", []) + [f"lang_{lang_alpha2_tag}"]
+
+        # logg.debug(f"\n>>>>>> par {i}\n{par}")
         # logg.debug(f"{type(par)=}")
         # logg.debug(f"{par.contents=}")
         # logg.debug(f"str(par): >{str(par)}<")

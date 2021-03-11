@@ -31,13 +31,13 @@ with replace_stdin(StringIO("some preprogrammed input")):
 * Show only beginning and end of the sentences, option to show all.
 * The prompts to the user should not be on the debug logger,
   but on a separate one.
-* Option to make hint window bigger (`w+1`).
 * Shift all subsequent links using the acquired hints.
-* Check if the combined chapter exists already.
 
 ##### Done
 
 * Split in separate function the analysis of a single chapter.
+* Option to make hint window bigger (`w+1`).
+* Check if the combined chapter exists already.
 
 ## CLI
 
@@ -63,6 +63,7 @@ with replace_stdin(StringIO("some preprogrammed input")):
   It should be line 5 in `tmpl_content.opf`:
   `<dc:language>en</dc:language>`
   Set it based on l1.
+  Also somewhere else, look for `en`.
 * There is a mysterious lang attribute that can be put in `<p>` tags, maybe two
   dictionaries can be used?
 * In the original chapters a lot of classes are used,

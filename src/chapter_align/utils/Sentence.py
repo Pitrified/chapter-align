@@ -16,6 +16,9 @@ class Sentence:
         # logg.debug("Start __init__")
 
         self.orig_tag = orig_tag
+
+        # TODO add lang='' to the tag
+
         self.orig_str = str(self.orig_tag)
 
         # if there is only one component, just get the string

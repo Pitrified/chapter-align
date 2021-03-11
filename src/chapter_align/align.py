@@ -2,9 +2,13 @@ import logging
 from pathlib import Path
 import typing as ty
 
+# import prettierfier  # type: ignore
 from bs4 import BeautifulSoup  # type: ignore
+import pycountry  # type: ignore
+from termcolor import colored
 
-from .utils.Sentence import Sentence
+# from .utils.Sentence import Sentence
+# from .utils.customhtmlparser import MyHTMLParser
 from .utils.SentenceList import SentenceList
 from .utils.load_chapters import load_chapter
 from .utils.misc import get_package_folders
@@ -197,7 +201,7 @@ def compute_incremental_len(
     return scaling_factor, inc_len0, inc_sca_len1
 
 
-def interactive_hints(
+def interactive_hints(  # noqa: C901 very COMPLEX sorry
     sent0: SentenceList,
     sent1: SentenceList,
     composed_indexes: ty.List[ty.Tuple[int, int]],
@@ -231,6 +235,7 @@ def interactive_hints(
 
     # a visible tag
     vt = ">>>>>> "
+    tv = " <<<<<<"
 
     # the hint will link a sentence from l0 to l1
     hints: ty.List[ty.Tuple[int, int]] = []
@@ -249,23 +254,43 @@ def interactive_hints(
 
             # extract the central index for l1
             i1 = link0to1[curr_hi0]
-            logg.debug(f"\n{vt*3}curr_hi0: {curr_hi0} -> {i1} {vt*3}")
+            recap = f"\n{vt*3}"
+            recap += colored(f"curr_hi0: {curr_hi0} -> {i1}", "cyan")
+            recap += f"{tv*3}"
+            logg.debug(recap)
 
             # the l0 sentence to align
             # logg.debug(f"sent0[{curr_hi0}]:\n{sent0[curr_hi0]}")
             i0_min = max(curr_hi0 - curr_window_size0, 0)
             i0_max = min(curr_hi0 + curr_window_size0, len(sent0) - 1)
-            logg.debug(f"i0_min: {i0_min} i0_max: {i0_max} cws {curr_window_size0}")
+            # logg.debug(f"i0_min: {i0_min} i0_max: {i0_max} cws {curr_window_size0}")
             for hi0_show in range(i0_min, i0_max + 1):
-                logg.debug(f"\n{vt}sent0[{hi0_show}]:\n{sent0[hi0_show]}")
+                recap = f"\n{vt}"
+                if hi0_show == curr_hi0:
+                    recap += colored(f"sent0[{hi0_show}]:", "green", attrs=["bold"])
+                    recap += f"{tv}"
+                else:
+                    recap += f"sent0[{hi0_show}]:"
+                recap += f"\n{sent0[hi0_show]}"
+                logg.debug(recap)
 
             # the range of l1 sentences to pick from
             i1_min = max(i1 - curr_window_size1, 0)
             i1_max = min(i1 + curr_window_size1, len(sent1) - 1)
             for hi1 in range(i1_min, i1_max + 1):
-                logg.debug(f"\n{vt}sent1[{hi1-i1}] ({hi1}):\n{sent1[hi1]}")
+                recap = f"\n{vt}"
+                if hi1 == i1:
+                    recap += colored(f"sent1[{hi1-i1}] ({hi1}):", "green")
+                    recap += f"{tv}"
+                else:
+                    recap += f"sent1[{hi1-i1}] ({hi1}):"
+                recap += f"\n{sent1[hi1]}"
+                logg.debug(recap)
 
-            ri = input()
+            prompt = "Change the l0 sentence: s0[NUM]."
+            prompt += "\tChange the window size: w{0|1}[NUM]."
+            prompt += "\tInsert the correct l1 sentence: [NUM]: "
+            ri = input(prompt)
 
             # change the l0 sentence
             if ri.startswith("s0"):
@@ -380,9 +405,9 @@ def align_with_hints(
         rel_next1: int = 0
 
         # add a Sentence to debug things
-        sentence_soup = BeautifulSoup("<p>New hint.</p>", "html.parser")
-        sentence_tag = sentence_soup.find_all("p")[0]
-        composed.append(Sentence(sentence_tag))
+        # sentence_soup = BeautifulSoup("<p>New hint.</p>", "html.parser")
+        # sentence_tag = sentence_soup.find_all("p")[0]
+        # composed.append(Sentence(sentence_tag))
 
         # add the first sentence from l0
         composed.append(sent0[hint[0]])
@@ -500,7 +525,7 @@ def align_book(
 ) -> None:
     r"""Align every chapter in a book"""
     logg = logging.getLogger(f"c.{__name__}.align_book")
-    # logg.setLevel("DEBUG")
+    logg.setLevel("DEBUG")
     logg.info("\nStart align_book")
 
     #############################################################
@@ -544,7 +569,10 @@ def align_book(
         lang_folder0 = book_folder / languages[0]
         chapter_name0 = chapter_templates[0].format(chapter_index0)
         chapter_path0 = lang_folder0 / chapter_name0
-        sent0 = load_chapter(chapter_path0)
+        lang0 = pycountry.languages.get(name=languages[0])
+        logg.debug(f"lang0: {lang0}")
+        lang_alpha2_tag0 = lang0.alpha_2
+        sent0 = load_chapter(chapter_path0, lang_alpha2_tag0)
 
         recap = f"{chapter_path0=}"
         recap += f" len(sent0): {len(sent0)}"
@@ -558,7 +586,10 @@ def align_book(
         lang_folder1 = book_folder / languages[1]
         chapter_name1 = chapter_templates[1].format(chapter_index1)
         chapter_path1 = lang_folder1 / chapter_name1
-        sent1 = load_chapter(chapter_path1)
+        lang1 = pycountry.languages.get(name=languages[1])
+        logg.debug(f"lang1: {lang1}")
+        lang_alpha2_tag1 = lang1.alpha_2
+        sent1 = load_chapter(chapter_path1, lang_alpha2_tag1)
 
         recap = f"{chapter_path1=}"
         recap += f" len(sent1): {len(sent1)}"
@@ -595,4 +626,19 @@ def align_book(
             chapter_content=composed_chapter_text,
         )
 
-        composed_chapter_path.write_text(full_ch_text)
+        # composed_chapter_path.write_text(full_ch_text)
+
+        # full_ch_text = full_ch_text.replace("\n", " ")
+        # parser = MyHTMLParser()
+        # parser.feed(full_ch_text)
+        # parsed_text = parser.get_parsed_string()
+        # composed_chapter_path.write_text(parsed_text)
+
+        # build a soup for the chapter
+        parsed_text = BeautifulSoup(full_ch_text, features="html.parser")
+        # write the prettified text
+        composed_chapter_path.write_text(parsed_text.prettify())
+
+        # prettierfier!
+        # pretty_text = prettierfier.prettify_html(parsed_text)
+        # composed_chapter_path.write_text(pretty_text)

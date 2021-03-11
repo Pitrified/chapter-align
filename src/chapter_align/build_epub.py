@@ -20,6 +20,7 @@ class EpubBuilder:
         tot_chapter_num: int,
         author_name_full: str,
         book_name_full: str,
+        lang_alpha2_tag: str,
     ) -> None:
         r"""MAKEDOC: what is __init__ doing?"""
         logg = logging.getLogger(f"c.{__name__}.__init__")
@@ -32,6 +33,7 @@ class EpubBuilder:
         self.tot_chapter_num = tot_chapter_num
         self.author_name_full = author_name_full
         self.book_name_full = book_name_full
+        self.lang_alpha2_tag = lang_alpha2_tag
 
     def do_build(self) -> None:
         r"""MAKEDOC: what is do_build doing?
@@ -143,6 +145,7 @@ class EpubBuilder:
             * title
             * all_manifest
             * all_spine
+            * lang_alpha2_tag
         - self._tmpl_content_man:
             * split_name
             * idref
@@ -254,6 +257,7 @@ class EpubBuilder:
             title=self.book_name_full,
             all_manifest=all_manifest,
             all_spine=all_spine,
+            lang_alpha2_tag=self.lang_alpha2_tag,
         )
         content_path = self._epub_files_folder / "content.opf"
         content_path.write_text(content_filled)
@@ -331,6 +335,7 @@ def build_epub(
     tot_chapter_num: int,
     author_name_full: str,
     book_name_full: str,
+    lang_alpha2_tag: str,
 ) -> None:
     r"""MAKEDOC: what is build_epub doing?"""
     logg = logging.getLogger(f"c.{__name__}.build_epub")
@@ -351,5 +356,6 @@ def build_epub(
         tot_chapter_num,
         author_name_full,
         book_name_full,
+        lang_alpha2_tag,
     )
     eb.do_build()
