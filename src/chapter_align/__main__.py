@@ -1,15 +1,15 @@
-from pathlib import Path
 import logging
+from pathlib import Path
 
 import click
 import colorama  # type: ignore
 import pycountry  # type: ignore
 
 from . import __version__
-from .utils.misc import get_package_folders  # type: ignore
-from .utils.misc import setup_logger
 from .align import align_book
 from .build_epub import build_epub
+from .utils.misc import get_package_folders  # type: ignore
+from .utils.misc import setup_logger
 
 
 @click.command()
@@ -90,6 +90,13 @@ from .build_epub import build_epub
     help="The title of the book.",
     show_default=True,
 )
+# do interactive hint alignment
+@click.option(
+    "--do_interactive/--no_do_interactive",
+    default=True,
+    help="Do a manual alignment of the paragraphs.",
+    show_default=True,
+)
 # log options
 @click.option(
     "--log_level_debug",
@@ -119,6 +126,7 @@ def main(
     tot_chapter_num: int,
     author_name: str,
     book_title: str,
+    do_interactive: bool,
     log_level_debug: str,
     log_level_type: str,
 ) -> None:
@@ -126,8 +134,6 @@ def main(
     setup_logger(log_level_debug, log_level_type)
     logg = logging.getLogger(f"c.{__name__}.main")
     logg.debug("Starting main")
-
-    colorama.init()
 
     book_folder = Path(book_base_folder).expanduser().absolute()
     author_name_full = author_name
@@ -137,6 +143,14 @@ def main(
     chapter_templates = ch_template0, ch_template1
     chapter_start_indexes = ch_start_index0, ch_start_index1
 
+    # check that the languages are valid
+    lang0 = pycountry.languages.get(name=languages[0])
+    lang1 = pycountry.languages.get(name=languages[1])
+    if lang0 is None or lang1 is None:
+        raise click.UsageError(f"Not a valid language tag: {languages}")
+
+    colorama.init()
+
     align_book(
         book_folder,
         languages,
@@ -145,10 +159,10 @@ def main(
         tot_chapter_num,
         author_name_full,
         book_name_full,
+        do_interactive,
     )
 
-    lang1 = pycountry.languages.get(name=languages[1])
-    logg.debug(f"lang1: {lang1}")
+    # extract the alpha tag for the epub
     lang_alpha2_tag1 = lang1.alpha_2
 
     build_epub(

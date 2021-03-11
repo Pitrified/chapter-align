@@ -1,0 +1,980 @@
+{
+  "-y": [
+    "-eux",
+    "-euse",
+    "-et",
+    "-ette",
+    "-in",
+    "-ine",
+    "-é"
+  ],
+  "y'": [
+    "second-person",
+    "t'"
+  ],
+  "yacht": [
+    "yacht"
+  ],
+  "yachter": [
+    "yachtman"
+  ],
+  "yachtsman": [
+    "yachtsman",
+    "yachtman"
+  ],
+  "yachtswoman": [
+    "yachtswoman",
+    "yachtwoman"
+  ],
+  "yaffingale": [
+    "green woodpecker"
+  ],
+  "yaffle": [
+    "green woodpecker"
+  ],
+  "yaffler": [
+    "green woodpecker"
+  ],
+  "yah": [
+    "yes",
+    "hue"
+  ],
+  "Yahweh": [
+    "Yahweh",
+    "Jehovah"
+  ],
+  "Yair": [
+    "Jair"
+  ],
+  "yak": [
+    "yack",
+    "yak",
+    "jacasser"
+  ],
+  "Yakut": [
+    "yakoute"
+  ],
+  "Yakutia": [
+    "Yakoutie"
+  ],
+  "Yakutsk": [
+    "Iakoutsk"
+  ],
+  "yale": [
+    "éale"
+  ],
+  "y'all": [
+    "vous",
+    "vous autres"
+  ],
+  "Yalta": [
+    "Yalta"
+  ],
+  "yam": [
+    "potato",
+    "igname",
+    "taro",
+    "sweet potato"
+  ],
+  "yana": [
+    "yâna"
+  ],
+  "yandere": [
+    "yandere"
+  ],
+  "Yandex": [
+    "Yandex"
+  ],
+  "Yangon": [
+    "Rangoun",
+    "Rangoon"
+  ],
+  "Yang-tzŭ": [
+    "Yangtze"
+  ],
+  "Yangtze": [
+    "Yangzi Jiang",
+    "Yangtsé",
+    "fleuve Bleu"
+  ],
+  "Yangtze dolphin": [
+    "baiji"
+  ],
+  "Yangtze River dolphin": [
+    "baiji"
+  ],
+  "yank": [
+    "coup sec",
+    "tirer d'un coup sec",
+    "retirer"
+  ],
+  "Yank": [
+    "Yankee",
+    "ricain",
+    "ricaine",
+    "ricains",
+    "ricaines",
+    "amerloque"
+  ],
+  "Yanukovych": [
+    "Ianoukovytch",
+    "Ianoukovitch"
+  ],
+  "yaoi": [
+    "yaoi"
+  ],
+  "Yaoundé": [
+    "Yaoundé"
+  ],
+  "yap": [
+    "japper",
+    "jacasser"
+  ],
+  "Yap": [
+    "Yap"
+  ],
+  "yard": [
+    "cour",
+    "jardin",
+    "vergue",
+    "verge",
+    "yard"
+  ],
+  "Yard": [
+    "Jamaica"
+  ],
+  "yardbird": [
+    "détenu",
+    "taulard",
+    "troufion",
+    "homme de corvée"
+  ],
+  "yardstick": [
+    "aune"
+  ],
+  "Yarmouk": [
+    "Yarmouk"
+  ],
+  "yarmulke": [
+    "kippa"
+  ],
+  "yarn": [
+    "fil",
+    "corde"
+  ],
+  "Yaroslav": [
+    "Iaroslav"
+  ],
+  "Yaroslavl": [
+    "Iaroslavl"
+  ],
+  "yarrow": [
+    "achillée",
+    "mille-feuille"
+  ],
+  "yashmak": [
+    "litham",
+    "voile",
+    "niqab"
+  ],
+  "yataghan": [
+    "yatagan"
+  ],
+  "yatzy": [
+    "Yahtzee"
+  ],
+  "yaw": [
+    "lacet"
+  ],
+  "yawl": [
+    "yole"
+  ],
+  "yawn": [
+    "bâiller",
+    "béer",
+    "bâillement"
+  ],
+  "y-axis": [
+    "axe des y",
+    "axe des ordonnées"
+  ],
+  "yay": [
+    "hourra",
+    "youpi"
+  ],
+  "Yazidi": [
+    "Yézidi",
+    "Yézidie",
+    "yézidi",
+    "yézidie",
+    "Yazidi",
+    "Yazidie",
+    "yazidi",
+    "yazidie"
+  ],
+  "Yazidism": [
+    "yézidisme"
+  ],
+  "Y chromosome": [
+    "chromosome Y"
+  ],
+  "yeah": [
+    "ouais"
+  ],
+  "yeah, right": [
+    "mon œil",
+    "mais bien sûr"
+  ],
+  "year": [
+    "année",
+    "an"
+  ],
+  "yearbook": [
+    "annuaire"
+  ],
+  "year in, year out": [
+    "bon an mal an"
+  ],
+  "yearly": [
+    "annuel",
+    "annuellement",
+    "annuaire"
+  ],
+  "yearn": [
+    "languir",
+    "regretter"
+  ],
+  "yearning": [
+    "aspiration",
+    "envie"
+  ],
+  "year-round": [
+    "à l'année"
+  ],
+  "yeast": [
+    "levure",
+    "écume"
+  ],
+  "yech": [
+    "yuck"
+  ],
+  "Yehuda": [
+    "Judah"
+  ],
+  "Yehudit": [
+    "Judith"
+  ],
+  "Yekaterinburg": [
+    "Iekaterinbourg",
+    "Ekaterinbourg",
+    "Sverdlovsk"
+  ],
+  "yell": [
+    "crier",
+    "hurler"
+  ],
+  "yellow": [
+    "jaune",
+    "froussard",
+    "lâche",
+    "jaunir"
+  ],
+  "yellow badge": [
+    "étoile jaune",
+    "étoile de David"
+  ],
+  "yellow bile": [
+    "bile jaune"
+  ],
+  "yellow-billed loon": [
+    "plongeon",
+    "à",
+    "bec",
+    "blanc"
+  ],
+  "yellow-browed warbler": [
+    "pouillot à grands sourcils"
+  ],
+  "yellow card": [
+    "carton jaune"
+  ],
+  "yellow-cheeked tit": [
+    "mésange à dos tacheté"
+  ],
+  "yellow-eyed penguin": [
+    "manchot antipode"
+  ],
+  "yellow fever": [
+    "fièvre jaune"
+  ],
+  "yellow-green": [
+    "vert-jaune"
+  ],
+  "yellowhammer": [
+    "Bruant jaune"
+  ],
+  "yellowish": [
+    "plutôt",
+    "jaune",
+    "jaunâtre"
+  ],
+  "yellow jersey": [
+    "maillot jaune"
+  ],
+  "Yellowknife": [
+    "Yellowknife"
+  ],
+  "yellow-legged gull": [
+    "goéland leucophée"
+  ],
+  "yellow light": [
+    "feu jaune",
+    "feu orange"
+  ],
+  "yellow pages": [
+    "pages jaunes"
+  ],
+  "yellow peril": [
+    "péril jaune"
+  ],
+  "yellow press": [
+    "presse à sensation"
+  ],
+  "Yellow River": [
+    "fleuve Jaune",
+    "Huang He"
+  ],
+  "Yellow Sea": [
+    "mer Jaune"
+  ],
+  "yelp": [
+    "jappement",
+    "couinement",
+    "japper",
+    "couiner"
+  ],
+  "Yeltsin": [
+    "Eltsine"
+  ],
+  "Yemen": [
+    "Yémen"
+  ],
+  "Yemeni": [
+    "yéménite",
+    "Yéménite",
+    "Yéménais",
+    "Yéménois"
+  ],
+  "yen": [
+    "yen"
+  ],
+  "Yenisei": [
+    "Ienisseï"
+  ],
+  "yeoman": [
+    "franc-tenancier",
+    "valet"
+  ],
+  "yeoman's service": [
+    "travail de bénédictin",
+    "travail de Romain"
+  ],
+  "yep": [
+    "ouaip",
+    "mouais",
+    "moui",
+    "voui",
+    "ouin"
+  ],
+  "Yerevan": [
+    "Erevan"
+  ],
+  "yermulke": [
+    "yarmulke"
+  ],
+  "yes": [
+    "oui",
+    "si"
+  ],
+  "yes and no": [
+    "oui",
+    "et",
+    "non"
+  ],
+  "yeshiva": [
+    "yeshiva"
+  ],
+  "yes man": [
+    "béni-oui-oui"
+  ],
+  "yes-no": [
+    "est-ce que",
+    "-tu"
+  ],
+  "yes-no question": [
+    "question totale"
+  ],
+  "yessir": [
+    "oui",
+    "monsieur"
+  ],
+  "yesterday": [
+    "hier"
+  ],
+  "yesterday night": [
+    "last night"
+  ],
+  "yesteryear": [
+    "jadis",
+    "antan",
+    "année",
+    "passée",
+    "an",
+    "passé",
+    "dernière",
+    "dernier"
+  ],
+  "yet": [
+    "jusqu'à présent",
+    "encore",
+    "pourtant",
+    "mais",
+    "or",
+    "even"
+  ],
+  "yeti": [
+    "yéti",
+    "migou"
+  ],
+  "yew": [
+    "if"
+  ],
+  "yex": [
+    "hoqueter",
+    "roter"
+  ],
+  "Yiddish": [
+    "yiddish",
+    "Jewish"
+  ],
+  "Yiddishland": [
+    "Yiddishland"
+  ],
+  "yield": [
+    "céder",
+    "laisser passer",
+    "se rendre",
+    "capituler",
+    "rapporter",
+    "retourner",
+    "rendement"
+  ],
+  "yielding": [
+    "docile",
+    "concession"
+  ],
+  "yield the ghost": [
+    "give up the ghost"
+  ],
+  "yield up the ghost": [
+    "give up the ghost"
+  ],
+  "yiff": [
+    "baiser"
+  ],
+  "yin-yang": [
+    "yin-yang",
+    "vagina"
+  ],
+  "yippee": [
+    "youpi"
+  ],
+  "Yitzchak": [
+    "Isaac"
+  ],
+  "y'know": [
+    "t'",
+    "vois",
+    "sais"
+  ],
+  "ylide": [
+    "ylure"
+  ],
+  "-yne": [
+    "-yne"
+  ],
+  "yob": [
+    "voyou",
+    "asocial",
+    "houligan",
+    "paumé",
+    "pauv'type",
+    "loubard",
+    "blouson noir",
+    "casseur"
+  ],
+  "yobbo": [
+    "yob"
+  ],
+  "yoctoampere": [
+    "yoctoampère"
+  ],
+  "yoctometer": [
+    "yoctometre"
+  ],
+  "yoctometre": [
+    "yoctomètre"
+  ],
+  "yod": [
+    "yod"
+  ],
+  "yodel": [
+    "iodler",
+    "yodler",
+    "jodler",
+    "yodel",
+    "jodel",
+    "iodel"
+  ],
+  "yoga": [
+    "yoga"
+  ],
+  "yoghurt cheese": [
+    "labneh"
+  ],
+  "yogi": [
+    "yogi"
+  ],
+  "yogic": [
+    "yogique"
+  ],
+  "yogist": [
+    "yoguiste"
+  ],
+  "yogurt": [
+    "yaourt",
+    "yoghourt",
+    "yogourt"
+  ],
+  "yoke": [
+    "joug",
+    "carrying pole"
+  ],
+  "yokel": [
+    "manant",
+    "plouc"
+  ],
+  "Yolanda": [
+    "Yolande"
+  ],
+  "yolk": [
+    "jaune d'oeuf",
+    "jaune"
+  ],
+  "YOLO": [
+    "on ne vit qu'une fois"
+  ],
+  "Yom Kippur": [
+    "Yom Kippour"
+  ],
+  "yomp": [
+    "crapahutage",
+    "marche forcée",
+    "crapahuter",
+    "avancer à marches forcées"
+  ],
+  "yonder": [
+    "là-bas"
+  ],
+  "yoni": [
+    "yoni"
+  ],
+  "Yonne": [
+    "Yonne"
+  ],
+  "yore": [
+    "jadis",
+    "antan"
+  ],
+  "York": [
+    "York",
+    "Yorck",
+    "Yorque"
+  ],
+  "Yorkshire": [
+    "Yorkshire"
+  ],
+  "Yoruba": [
+    "yoruba"
+  ],
+  "Yoshkar-Ola": [
+    "Iochkar-Ola"
+  ],
+  "yotta-": [
+    "yotta-"
+  ],
+  "you": [
+    "vous",
+    "toi",
+    "tu",
+    "on",
+    "se",
+    "soi",
+    "espèce de",
+    "bande de",
+    "vouvoyer",
+    "voussoyer"
+  ],
+  "you are welcome": [
+    "you're welcome"
+  ],
+  "you are what you eat": [
+    "tu es ce que tu manges",
+    "vous êtes ce que vous mangez"
+  ],
+  "you bet": [
+    "plutôt",
+    "oui",
+    "y a intérêt",
+    "je",
+    "veux",
+    "un peu",
+    "rien qu'un peu"
+  ],
+  "you can catch more flies with honey than with vinegar": [
+    "plus fait douceur que violence",
+    "on n'attrape pas des mouches avec du vinaigre"
+  ],
+  "you can lead a horse to water, but you can't make it drink": [
+    "on ne saurait faire boire un âne qui n'a pas soif"
+  ],
+  "you can't judge a book by its cover": [
+    "l'habit ne fait pas le moine"
+  ],
+  "you can't make an omelette without breaking eggs": [
+    "you've got to crack a few eggs to make an omelette"
+  ],
+  "you can't teach an old dog new tricks": [
+    "on n'apprend pas au vieux singe à faire des grimaces"
+  ],
+  "you don't say": [
+    "sans blague",
+    "sans dec"
+  ],
+  "you get what you pay for": [
+    "en avoir pour son argent"
+  ],
+  "you have beautiful eyes": [
+    "tu as de beaux yeux"
+  ],
+  "you hear me": [
+    "c'est compris ?",
+    "compris ?",
+    "c'est clair ?"
+  ],
+  "you know": [
+    "tu vois",
+    "tu sais"
+  ],
+  "you know what": [
+    "tu sais quoi",
+    "vous savez quoi"
+  ],
+  "you-know-what": [
+    "tu sais quoi",
+    "que tu sais",
+    "vous savez quoi",
+    "que vous savez"
+  ],
+  "you-know-who": [
+    "tu sais qui",
+    "qui tu sais",
+    "vous savez qui",
+    "qui vous savez"
+  ],
+  "you never know": [
+    "on",
+    "ne",
+    "sait",
+    "jamais"
+  ],
+  "young": [
+    "jeune",
+    "petit"
+  ],
+  "younger brother": [
+    "frère",
+    "cadet"
+  ],
+  "younger sister": [
+    "petite",
+    "sœur",
+    "cadette"
+  ],
+  "youngest": [
+    "benjamin"
+  ],
+  "young lady": [
+    "jeune fille"
+  ],
+  "young man": [
+    "youth",
+    "jeune homme"
+  ],
+  "Young's modulus": [
+    "module de Young"
+  ],
+  "youngster": [
+    "ado",
+    "enfant"
+  ],
+  "your": [
+    "ton",
+    "ta",
+    "tes",
+    "votre",
+    "vos"
+  ],
+  "you're never too old to learn": [
+    "il n'est jamais trop tard pour bien faire"
+  ],
+  "you're right": [
+    "vous avez raison",
+    "tu as raison"
+  ],
+  "you're telling me": [
+    "à qui le dis-tu"
+  ],
+  "you're welcome": [
+    "de rien",
+    "il n'y a pas de quoi",
+    "pas de quoi",
+    "je vous en prie",
+    "je t'en prie",
+    "avec plaisir",
+    "à votre service",
+    "à ton service",
+    "s'il vous plaît",
+    "bienvenue"
+  ],
+  "your grace": [
+    "Votre Grâce"
+  ],
+  "Your Highness": [
+    "Votre Altesse"
+  ],
+  "Your Majesty": [
+    "Votre Majesté",
+    "sire"
+  ],
+  "your mileage may vary": [
+    "des goûts et des couleurs, on ne discute pas",
+    "des goûts et des couleurs …"
+  ],
+  "your mom": [
+    "ta mère"
+  ],
+  "your mother": [
+    "ta mère"
+  ],
+  "yours": [
+    "le tien",
+    "la tienne",
+    "les tiens",
+    "les tiennes",
+    "les vôtres",
+    "le vôtre",
+    "la vôtre"
+  ],
+  "yourself": [
+    "te",
+    "vous",
+    "toi-même",
+    "vous-même"
+  ],
+  "yourselves": [
+    "vous",
+    "vous-mêmes"
+  ],
+  "yours faithfully": [
+    "fidèlement votre",
+    "sincères salutations"
+  ],
+  "yours sincerely": [
+    "sincères salutations",
+    "fidèlement votre"
+  ],
+  "yours truly": [
+    "votre humble serviteur",
+    "votre serviteur"
+  ],
+  "your wish is my command": [
+    "vos désirs sont des ordres"
+  ],
+  "Your Worship": [
+    "Votre Révérence"
+  ],
+  "you said it": [
+    "tu l'as dit bouffi",
+    "tu l'as dit"
+  ],
+  "you scratch my back and I'll scratch yours": [
+    "on ne donne rien pour rien",
+    "on n'a rien pour rien",
+    "donnant donnant"
+  ],
+  "you see": [
+    "vois-tu",
+    "voyez-vous"
+  ],
+  "you shouldn't have": [
+    "il ne fallait pas"
+  ],
+  "you snooze you lose": [
+    "qui part à la chasse perd sa place",
+    "qui va à la chasse perd sa place"
+  ],
+  "you tell me": [
+    "à toi de me le dire"
+  ],
+  "youth": [
+    "jeunesse",
+    "jeune",
+    "jeune homme"
+  ],
+  "youth center": [
+    "centre de jeunesse"
+  ],
+  "youth crime": [
+    "juvenile delinquency"
+  ],
+  "youthful": [
+    "juvénile",
+    "jeune"
+  ],
+  "youthfully": [
+    "juvénilement"
+  ],
+  "youth hostel": [
+    "auberge de jeunesse"
+  ],
+  "youth is wasted on the young": [
+    "si jeunesse savait, si vieillesse pouvait"
+  ],
+  "YouTube": [
+    "Youtube",
+    "YouTube"
+  ],
+  "YouTuber": [
+    "youtubeur",
+    "YouTubeur"
+  ],
+  "you've got to crack a few eggs to make an omelette": [
+    "on ne fait pas d'omelette sans casser des œufs",
+    "on ne saurait faire d'omelette sans casser des œufs"
+  ],
+  "yowzah": [
+    "yessir"
+  ],
+  "yo-yo": [
+    "yo-yo"
+  ],
+  "Ypresian": [
+    "Yprésien"
+  ],
+  "ytterbium": [
+    "ytterbium"
+  ],
+  "yttrium": [
+    "yttrium"
+  ],
+  "yttrium iron garnet": [
+    "grenat d'yttrium et de fer"
+  ],
+  "yuan": [
+    "yuan"
+  ],
+  "Yuan dynasty": [
+    "dynastie Yuan"
+  ],
+  "Yuan Tan": [
+    "Chinese New Year"
+  ],
+  "Yucatec Maya": [
+    "maya yucatèque"
+  ],
+  "Yucatán": [
+    "Péninsule du Yucatán",
+    "Yucatán"
+  ],
+  "yuck": [
+    "beurk"
+  ],
+  "yuck it up": [
+    "yuk it up"
+  ],
+  "yucky": [
+    "dégueu"
+  ],
+  "Yue": [
+    "yue"
+  ],
+  "Yugoslav": [
+    "Yugoslavian"
+  ],
+  "Yugoslavia": [
+    "Yougoslavie"
+  ],
+  "Yugoslavian": [
+    "yougoslave",
+    "Yougoslave"
+  ],
+  "yuk it up": [
+    "faire le mariole",
+    "faire le pitre",
+    "faire le zèbre"
+  ],
+  "Yukon": [
+    "Yukon"
+  ],
+  "Yukon Territory": [
+    "Yukon"
+  ],
+  "Yule log": [
+    "bûche de Noël",
+    "buche de Noël"
+  ],
+  "yum": [
+    "miam"
+  ],
+  "yummy": [
+    "délicieux",
+    "délicieuse"
+  ],
+  "yup": [
+    "ouais",
+    "ouep"
+  ],
+  "Yup'ik": [
+    "yupik de l'Alaska central"
+  ],
+  "yuppie": [
+    "yuppie",
+    "bobo"
+  ],
+  "yurt": [
+    "yourte"
+  ],
+  "Yuzhno-Sakhalinsk": [
+    "Ioujno-Sakhalinsk"
+  ],
+  "Yvelines": [
+    "Yvelines"
+  ],
+  "Yvette": [
+    "Yvette"
+  ],
+  "Yvonne": [
+    "Yvonne"
+  ]
+}

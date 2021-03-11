@@ -4,6 +4,7 @@
 
 * Colors for the prompt.
 * Merge CSS from the two originals, keep the `l1` in conflicts (and warn the user).
+* Add a tag in the composed output that tells if the chapter was manually aligned.
 
 ## NMT
 
@@ -73,6 +74,7 @@ with replace_stdin(StringIO("some preprogrammed input")):
 * Also flags for training the model.
 * Indexes for first/last chapter to analyze.
 * Single option for `l01`, pass a list.
+    [Multi value options](https://click.palletsprojects.com/en/7.x/options/#multi-value-options)
 
 ##### Done
 

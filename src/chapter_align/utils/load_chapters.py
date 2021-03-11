@@ -12,7 +12,7 @@ from .SentenceList import SentenceList
 def load_chapter(chapter_path: Path, lang_alpha2_tag: str) -> SentenceList:
     r"""Load a chapter and split it in Sentences"""
     logg = logging.getLogger(f"c.{__name__}.load_chapter")
-    logg.setLevel("DEBUG")
+    # logg.setLevel("DEBUG")
     logg.debug("Start load_chapter")
 
     if not chapter_path.exists():

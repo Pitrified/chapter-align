@@ -29,6 +29,18 @@ def test_get_package_folders_epub() -> None:
     assert template_epub_folder.name == "template_epub"
 
 
+def test_get_package_folders_word_pairs() -> None:
+    """It gets the package word pairs folder"""
+    word_pairs_folder = get_package_folders("word_pairs")
+    assert word_pairs_folder.name == "word_pairs"
+
+
+def test_get_package_folders_common_words() -> None:
+    """It gets the package word pairs folder"""
+    common_words_folder = get_package_folders("common_words")
+    assert common_words_folder.name == "common_words"
+
+
 def test_get_package_folders_not_valid_key() -> None:
     """Raise KeyError when the folder requested is not known"""
     with pytest.raises(KeyError, match="Not recognized"):

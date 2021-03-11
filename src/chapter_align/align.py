@@ -1,61 +1,99 @@
 import logging
 from pathlib import Path
+import re
 import typing as ty
 
-# import prettierfier  # type: ignore
 from bs4 import BeautifulSoup  # type: ignore
 import pycountry  # type: ignore
 from termcolor import colored
 
-# from .utils.customhtmlparser import MyHTMLParser
 from .utils.Sentence import Sentence
 from .utils.SentenceList import SentenceList
 from .utils.load_chapters import load_chapter
 from .utils.misc import get_package_folders
+from .utils.misc import load_word_pairs
+from .utils.misc import load_common_words
 
 
 def color_in_dict(
-    color_sent: Sentence, match_sentences: ty.List[Sentence], color: str = "yellow"
+    color_sent: Sentence,
+    match_sent: Sentence,
+    word_pairs: ty.Dict[str, ty.List[str]],
+    common_words_color: ty.Set[str],
+    color_pair: str = "green",
+    color_frac: str = "yellow",
 ) -> str:
-    r"""MAKEDOC: what is color_in_dict doing?"""
+    r"""Use match_sent to color interesting words in color_sent.
+
+    Args:
+        color_sent: Sentence to color.
+        match_sent: Sentence to match from.
+        word_pairs: Dict from match to color language.
+        common_words_color: Common words in the color language.
+        color_pair: Color to use for translation match.
+        color_frac: Color to use for fraction match.
+    """
     logg = logging.getLogger(f"c.{__name__}.color_in_dict")
     # logg.setLevel("DEBUG")
     logg.debug("Start color_in_dict")
 
     # build set of words in match_sent
-    words_seen = set()
-    for match_sent in match_sentences:
-        for word in match_sent.norm_tra.split(" "):
-            # keep vaguely interesting words
-            if len(word) < 4:
-                continue
-            words_seen.add(word)
+    words_seen_match = set()
+    words_seen_color = set()
+    for word_match in match_sent.norm_tra.split(" "):
 
-    logg.debug(f"words_seen: {words_seen}")
+        # keep only alphabetic chars [^\W\d_]
+        word_match = re.sub(r"[\W\d_]", "", word_match)
+        word_match = word_match.lower()
+
+        # keep vaguely interesting match words
+        if len(word_match) < 3:
+            continue
+        words_seen_match.add(word_match)
+
+        # add the color words if a translation exists
+        if word_match in word_pairs:
+            for word_color in word_pairs[word_match]:
+                # if len(word_color) < 2:
+                #     continue
+                word_color_clean = re.sub(r"[\W\d_]", "", word_color)
+                word_color_clean = word_color_clean.lower()
+                if word_color_clean not in common_words_color:
+                    words_seen_color.add(word_color_clean)
+
+    logg.debug(f"words_seen_match: {words_seen_match}")
 
     color_str = ""
-    for word in color_sent.norm_tra.split(" "):
-        matched = False
-        for match_word in words_seen:
-            frac_match = int(len(match_word) * 0.6)
+    for word_color_orig in color_sent.norm_tra.split(" "):
 
-            # keep vaguely interesting matches
-            if frac_match < 3:
-                continue
+        # only keep alpha and compare lowercase
+        word_color_clean = re.sub(r"[\W\d_]", "", word_color_orig)
+        word_color_clean = word_color_clean.lower()
 
-            match_word = match_word.lower()
-            word = word.lower()
-
-            if word.startswith(match_word[:frac_match]):
-                logg.debug(f"word: {word} matches {match_word}")
-                matched = True
-
-        # if the beginning of a seen word is in the current word, color it
-        # if match_word[:frac_match] in word:
-        if matched:
-            color_str += colored(f"{word} ", color)
+        # match if the color word is a translation of one of the match words
+        if word_color_clean in words_seen_color:
+            matched_pair = True
         else:
-            color_str += f"{word} "
+            matched_pair = False
+
+        # match using fractions of the l0 and l1 word
+        # if the beginning of a seen word_color is in the current word_color, color it
+        matched_frac = False
+        for word_match in words_seen_match:
+            frac_len = int(len(word_match) * 0.6)
+            # keep vaguely interesting matches
+            if frac_len < 3:
+                continue
+            if word_color_clean.startswith(word_match[:frac_len]):
+                logg.debug(f"word_color_clean: {word_color_clean} matches {word_match}")
+                matched_frac = True
+
+        if matched_pair:
+            color_str += colored(f"{word_color_orig} ", color_pair)
+        elif matched_frac:
+            color_str += colored(f"{word_color_orig} ", color_frac)
+        else:
+            color_str += f"{word_color_orig} "
 
     return color_str
 
@@ -251,15 +289,17 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
     sent0: SentenceList,
     sent1: SentenceList,
     composed_indexes: ty.List[ty.Tuple[int, int]],
-    hint_dist: int = -1,
+    hint_dist: int,
+    word_pairs: ty.Dict[str, ty.List[str]],
+    common_words1: ty.Set[str],
 ) -> ty.List[ty.Tuple[int, int]]:
     r"""MAKEDOC: what is interactive_hints doing?"""
     logg = logging.getLogger(f"c.{__name__}.interactive_hints")
     logg.setLevel("DEBUG")
     logg.debug("Start interactive_hints")
 
-    for ci in composed_indexes:
-        logg.debug(f"{'    ' if ci[0] == 1 else ''}{ci[1]: 3d}")
+    # for ci in composed_indexes:
+    #     logg.debug(f"{'    ' if ci[0] == 1 else ''}{ci[1]: 3d}")
 
     # build the links from s0 to s1, to provide a better prompt
     curr_i1: int = len(sent1) - 1
@@ -270,8 +310,8 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
         else:
             curr_i1 = ci[1]
 
-    for i in range(len(link0to1)):
-        logg.debug(f"i: {i} -> {link0to1[i]}")
+    # for i in range(len(link0to1)):
+    #     logg.debug(f"i: {i} -> {link0to1[i]}")
 
     hint_indexes0 = list(range(3, len(sent0), hint_dist))
     logg.debug(f"hint_indexes0: {hint_indexes0}")
@@ -302,16 +342,15 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
             i1 = link0to1[curr_hi0]
 
             # line to split the flow
-            recap = f"\n{vt*3}"
-            recap += colored(f"curr_hi0: {curr_hi0} -> {i1}", "cyan")
-            recap += f"{tv*3}"
+            recap = colored(f"{vt*3}", "grey", "on_cyan")
+            recap += colored(f"curr_hi0: {curr_hi0} -> {i1}", "white", "on_cyan")
+            recap += colored(f"{tv*3}", "grey", "on_cyan")
             logg.debug(recap)
 
             # the l0 sentence to align
             # logg.debug(f"sent0[{curr_hi0}]:\n{sent0[curr_hi0]}")
             i0_min = max(curr_hi0 - curr_window_size0, 0)
             i0_max = min(curr_hi0 + curr_window_size0, len(sent0) - 1)
-            # logg.debug(f"i0_min: {i0_min} i0_max: {i0_max} cws {curr_window_size0}")
             for hi0_show in range(i0_min, i0_max + 1):
                 recap = f"\n{vt}"
                 if hi0_show == curr_hi0:
@@ -319,8 +358,7 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
                     recap += f"{tv}"
                 else:
                     recap += f"sent0[{hi0_show}]:"
-                # recap += f"\n{sent0[hi0_show]}"
-                recap += f"\n{color_in_dict(sent0[hi0_show], [sent1[i1]])}"
+                recap += f"\n{sent0[hi0_show]}"
                 logg.debug(recap)
 
             # line to split the flow
@@ -342,7 +380,10 @@ def interactive_hints(  # noqa: C901 very COMPLEX sorry
                 else:
                     recap += f"sent1[{hi1-i1}] ({hi1}):"
                 # recap += f"\n{sent1[hi1]}"
-                recap += f"\n{color_in_dict(sent1[hi1], [sent0[curr_hi0]])}"
+                color_str = color_in_dict(
+                    sent1[hi1], sent0[curr_hi0], word_pairs, common_words1
+                )
+                recap += f"\n{color_str}"
                 logg.debug(recap)
 
             prompt = "Change the l0 sentence: s0[NUM]."
@@ -538,7 +579,13 @@ def align_with_hints(
     return composed
 
 
-def align_chapter(sent0: SentenceList, sent1: SentenceList) -> SentenceList:
+def align_chapter(
+    sent0: SentenceList,
+    sent1: SentenceList,
+    do_interactive: bool,
+    word_pairs: ty.Dict[str, ty.List[str]],
+    common_words1: ty.Set[str],
+) -> SentenceList:
     r"""MAKEDOC: what is align_chapter doing?"""
     logg = logging.getLogger(f"c.{__name__}.align_chapter")
     logg.setLevel("DEBUG")
@@ -562,11 +609,12 @@ def align_chapter(sent0: SentenceList, sent1: SentenceList) -> SentenceList:
     # use the basic alignment to prompt for hints
     #############################################################
 
-    do_interactive = True
     hint_dist = 5
 
     if do_interactive:
-        hints = interactive_hints(sent0, sent1, composed_indexes, hint_dist)
+        hints = interactive_hints(
+            sent0, sent1, composed_indexes, hint_dist, word_pairs, common_words1
+        )
         composed = align_with_hints(sent0, sent1, inc_len0, inc_sca_len1, hints)
 
     return composed
@@ -580,6 +628,7 @@ def align_book(
     tot_chapter_num: int,
     author_name_full: str,
     book_name_full: str,
+    do_interactive: bool,
 ) -> None:
     r"""Align every chapter in a book"""
     logg = logging.getLogger(f"c.{__name__}.align_book")
@@ -604,6 +653,12 @@ def align_book(
     # build the composed tag
     composed_tag = f"{languages[0]}/{languages[1]}"
 
+    # load the word pairs
+    word_pairs = load_word_pairs(languages)
+
+    # load the common words for l1
+    common_words1 = load_common_words(languages[1], 300)
+
     # for chapter_index in list(range(tot_chapter_num))[10:11]:
     for chapter_index in list(range(tot_chapter_num))[:]:
         chapter_index0 = chapter_index + chapter_start_indexes[0]
@@ -615,6 +670,7 @@ def align_book(
         # get the chapter output path
         composed_chapter_name = f"ch_{chapter_index+1:04d}.xhtml"
         composed_chapter_path = composed_folder / composed_chapter_name
+        logg.debug(f"composed_chapter_path: {composed_chapter_path}")
 
         if composed_chapter_path.exists():
             logg.info(f"Skipping: {composed_chapter_path}, already processed.")
@@ -658,7 +714,9 @@ def align_book(
         # align the two SentenceList
         #############################################################
 
-        composed = align_chapter(sent0, sent1)
+        composed = align_chapter(
+            sent0, sent1, do_interactive, word_pairs, common_words1
+        )
 
         #############################################################
         # save the composed chapter
