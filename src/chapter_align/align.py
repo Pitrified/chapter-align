@@ -7,12 +7,12 @@ from bs4 import BeautifulSoup  # type: ignore
 import pycountry  # type: ignore
 from termcolor import colored
 
-from .utils.Sentence import Sentence
-from .utils.SentenceList import SentenceList
 from .utils.load_chapters import load_chapter
 from .utils.misc import get_package_folders
-from .utils.misc import load_word_pairs
 from .utils.misc import load_common_words
+from .utils.misc import load_word_pairs
+from .utils.Sentence import Sentence
+from .utils.SentenceList import SentenceList
 
 
 def color_in_dict(
@@ -744,17 +744,7 @@ def align_book(
 
         # composed_chapter_path.write_text(full_ch_text)
 
-        # full_ch_text = full_ch_text.replace("\n", " ")
-        # parser = MyHTMLParser()
-        # parser.feed(full_ch_text)
-        # parsed_text = parser.get_parsed_string()
-        # composed_chapter_path.write_text(parsed_text)
-
         # build a soup for the chapter
         parsed_text = BeautifulSoup(full_ch_text, features="html.parser")
         # write the prettified text
         composed_chapter_path.write_text(parsed_text.prettify())
-
-        # prettierfier!
-        # pretty_text = prettierfier.prettify_html(parsed_text)
-        # composed_chapter_path.write_text(pretty_text)
