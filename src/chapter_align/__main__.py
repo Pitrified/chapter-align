@@ -12,7 +12,7 @@ from .utils.misc import get_package_folders  # type: ignore
 from .utils.misc import setup_logger
 
 
-@click.command()
+@click.command(context_settings=dict(max_content_width=120))
 # book base folder
 @click.option(
     "--book_base_folder",
